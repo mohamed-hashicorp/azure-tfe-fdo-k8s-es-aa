@@ -1,0 +1,35 @@
+location        = "westeurope"
+prefix          = "mytfe"
+subscription_id = "00000000-0000-0000-0000-000000000000"
+
+# AWS (Route53 DNS-01 challenge for Let's Encrypt)
+aws_region = "eu-west-1"
+
+# Use staging for testing, production when ready
+#acme_server_url = "https://acme-v02.api.letsencrypt.org/directory"
+acme_server_url = "https://acme-staging-v02.api.letsencrypt.org/directory"
+
+hosted_zone_name = "example.com"
+dns_record       = "tfe.example.com"
+email            = "admin@example.com"
+
+# TFE
+tfe_image_tag           = "1.2.2"
+tfe_license             = "02MV4UU43BK5H..."
+tfe_encryption_password = "ChangeMe123!"
+tfe_admin_password      = "ChangeMe123!"
+
+# PostgreSQL
+tfe_database_password  = "ChangeMe123!"
+tfe_database_username  = "tfeadmin"   # optional, defaults to "tfeadmin"
+
+# Azure Blob Storage
+blob_container_name = "tfe-blobs"
+
+# Azure Managed Redis SKU
+# Options: ComputeOptimized_X1 (2 GB), ComputeOptimized_X3 (6 GB), MemoryOptimized_M10 (10 GB)
+redis_sku = "ComputeOptimized_X3"
+
+# AKS node pool
+aks_node_count = 2
+aks_vm_size    = "Standard_D4s_v3"
