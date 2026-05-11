@@ -31,8 +31,9 @@ resource "helm_release" "tfe" {
       storage_account_name = azurerm_storage_account.tfe.name
       storage_container    = azurerm_storage_container.tfe.name
 
-      # Redis — host:port only; password flows in via TFE_REDIS_URL in tfe-secrets
-      redis_host = "${azurerm_managed_redis.tfe.hostname}:${azurerm_managed_redis.tfe.default_database[0].port}"
+      # Redis — host:port only; passwords flow in via tfe-secrets
+      redis_host         = "${azurerm_managed_redis.tfe.hostname}:${azurerm_managed_redis.tfe.default_database[0].port}"
+      redis_sidekiq_host = "${azurerm_managed_redis.tfe_sidekiq.hostname}:${azurerm_managed_redis.tfe_sidekiq.default_database[0].port}"
     })
   ]
 
@@ -41,7 +42,9 @@ resource "helm_release" "tfe" {
     azurerm_postgresql_flexible_server_database.tfe,
     azurerm_postgresql_flexible_server_configuration.extensions,
     azurerm_managed_redis.tfe,
+    azurerm_managed_redis.tfe_sidekiq,
     azurerm_private_endpoint.redis,
+    azurerm_private_endpoint.redis_sidekiq,
     kubernetes_secret.tfe_secrets,
     kubernetes_secret.tfe_tls,
     kubernetes_secret.registry,

@@ -38,6 +38,14 @@ resource "azurerm_subnet" "redis" {
   private_endpoint_network_policies = "Disabled"
 }
 
+resource "azurerm_subnet" "redis_sidekiq" {
+  name                              = "${var.prefix}-redis-sidekiq-subnet"
+  resource_group_name               = azurerm_resource_group.rg.name
+  virtual_network_name              = azurerm_virtual_network.vnet.name
+  address_prefixes                  = ["10.0.4.0/24"]
+  private_endpoint_network_policies = "Disabled"
+}
+
 # ---------------------------------------------------------------------------
 # Private DNS zone for PostgreSQL Flexible Server (VNet integration / private access)
 # The zone name suffix must end with .postgres.database.azure.com per Azure requirements.

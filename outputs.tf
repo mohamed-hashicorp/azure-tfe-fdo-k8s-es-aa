@@ -35,8 +35,13 @@ output "storage_account_name" {
 }
 
 output "redis_hostname" {
-  description = "Azure Managed Redis hostname"
+  description = "Azure Managed Redis hostname (main)"
   value       = azurerm_managed_redis.tfe.hostname
+}
+
+output "redis_sidekiq_hostname" {
+  description = "Azure Managed Redis hostname (Sidekiq)"
+  value       = azurerm_managed_redis.tfe_sidekiq.hostname
 }
 
 output "tfe_lb_ip" {

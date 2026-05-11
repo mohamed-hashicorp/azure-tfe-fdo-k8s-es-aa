@@ -49,8 +49,8 @@ container:
 # If you do want to specify resource limits, uncomment the following lines and adjust them as necessary.
 resources:
   requests:
-    memory: "4096Mi"
-    cpu: "2000m"
+    memory: "8Gi"
+    cpu: "4000m"
   # limits:
   #   memory: ""
   #   cpu: ""
@@ -322,6 +322,9 @@ env:
     TFE_REDIS_HOST: ${redis_host}
     TFE_REDIS_USE_AUTH: "true"
     TFE_REDIS_USE_TLS: "true"
+    TFE_REDIS_SIDEKIQ_HOST: ${redis_sidekiq_host}
+    TFE_REDIS_SIDEKIQ_USE_AUTH: "true"
+    TFE_REDIS_SIDEKIQ_USE_TLS: "true"
     # TFE_HOSTNAME: ""
     # TFE_CAPACITY_CONCURRENCY: ""
     # TFE_CAPACITY_CPU: ""

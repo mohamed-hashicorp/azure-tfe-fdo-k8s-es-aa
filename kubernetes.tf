@@ -62,7 +62,8 @@ resource "kubernetes_secret" "tfe_secrets" {
     # Storage account key for TFE object storage (Azure Blob)
     TFE_OBJECT_STORAGE_AZURE_ACCOUNT_KEY = azurerm_storage_account.tfe.primary_access_key
 
-    TFE_REDIS_PASSWORD = azurerm_managed_redis.tfe.default_database[0].primary_access_key
+    TFE_REDIS_PASSWORD         = azurerm_managed_redis.tfe.default_database[0].primary_access_key
+    TFE_REDIS_SIDEKIQ_PASSWORD = azurerm_managed_redis.tfe_sidekiq.default_database[0].primary_access_key
   }
 
   # The Kubernetes provider cannot reconcile data entries that are both sensitive
@@ -71,5 +72,6 @@ resource "kubernetes_secret" "tfe_secrets" {
   depends_on = [
     azurerm_storage_account.tfe,
     azurerm_managed_redis.tfe,
+    azurerm_managed_redis.tfe_sidekiq,
   ]
 }
